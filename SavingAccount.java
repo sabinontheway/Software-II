@@ -33,7 +33,7 @@ public class SavingAccount extends Account
 	@Override
 	public String toString() 
 	{
-		return getNumber() + "," + getBalance() + ","  + "," + interestRate;
+		return getNumber() + "," + getBalance() + "," + interestRate;
 	}
 
 	public String getType()
