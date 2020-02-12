@@ -49,7 +49,7 @@ public class Account {
 		System.out.println("Account balance : $"+ getBalance() + " Account");
 	}
 
-	@Override
+	
 	public String toString() 
 	{
 		return "[Account number=" + number + ", balance=" + balance + "]";
