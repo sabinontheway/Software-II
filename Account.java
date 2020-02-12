@@ -36,3 +36,31 @@ public class Account {
 		return true;
 	}
 	
+	// to deposit
+	public void desposit(double amount)
+	{
+		balance += amount;
+	}
+	
+	// to  print monthly statement
+	public void printMonthlyStatement()
+	{
+		System.out.println("Account number  : "+ getNumber() + " Account");
+		System.out.println("Account balance : $"+ getBalance() + " Account");
+	}
+
+	@Override
+	public String toString() 
+	{
+		return "[Account number=" + number + ", balance=" + balance + "]";
+	}
+	
+	// get type
+	public String getType()
+	{
+		return "";
+	}
+	
+}
+
+
