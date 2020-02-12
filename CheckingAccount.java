@@ -5,24 +5,14 @@
 public class CheckingAccount extends Account 
 {
     
-	private float limit;
 	private float serviceFee;
         
        
 		
-	public CheckingAccount(String number, float balance,float limit,float serviceFee) 
+	public CheckingAccount(String number, float balance,float serviceFee) 
 	{
 		super(number, balance);
-		this.limit = limit;
 		this.serviceFee = serviceFee;
-	}
-
-	public float getLimit() {
-		return limit;
-	}
-
-	public void setLimit(float limit) {
-		this.limit = limit;
 	}
 
 	public float getServiceFee() {
@@ -45,7 +35,7 @@ public class CheckingAccount extends Account
 	@Override
 	public String toString() 
 	{
-		return getNumber() + "," + getBalance() + "," + limit + "," + serviceFee;
+		return getNumber() + "," + getBalance() + ","  + serviceFee;
 	}
 	
 	// get type
