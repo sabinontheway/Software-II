@@ -81,16 +81,14 @@ public class BankCustomer
 			{
 				
 				CheckingAccount checking = (CheckingAccount)account;
-				// show limit and service fee
-				System.out.println("Limit Amount    : $"+ checking.getLimit());
+				// show service fee
 				System.out.println("Service fee     : $"+ checking.getServiceFee() );
 			}
 			else
 			{
 				//for savings account
 				SavingAccount saving = (SavingAccount)account;
-				// show limit and service fee
-				System.out.println("Limit Amount    : $"+ saving.getLimit() );
+				// show service fee
 				System.out.println("Interest rate   : "+ saving.getInterestRate() + "%");
 			}
 		}
