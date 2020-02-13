@@ -70,3 +70,41 @@ public class Software
 		}
 		return -1;
 	}
+	// find customer by user ID password
+	public BankCustomer getCustomerByUserPassword(String user,String password)
+	{
+		// check all customers
+		for( BankCustomer bankCustomer : customers )
+		{
+			// if the id matches
+			if( user.equals(bankCustomer.getUserName()) && password.equals(bankCustomer.getPassword()))
+			{
+				return bankCustomer;
+			}
+		}
+		return null;
+	}
+	
+	// display a customer with all account
+	public void displayCustomerAllAccounts(Scanner scanner)
+	{
+		System.out.println("Enter id : ");
+		String id = scanner.nextLine();
+		
+		// check if the customer is found
+		BankCustomer customer = getCustomerById(id);
+		
+		// // if this is null
+		if( customer == null )
+		{
+			// show message customer not found
+			System.out.println("Customer with id " + id + " does not exist");
+		}
+		else
+		{
+			// start customer menu with this customer
+			customer.printInformation();
+		}
+	}
+	
+	
