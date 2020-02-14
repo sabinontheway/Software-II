@@ -116,3 +116,174 @@ public class BankCustomer
 		}
 		return null;
 	}
+	// to check balance
+	public void checkBal(Scanner scanner)
+	{
+		// ask for account number
+		System.out.print("Enter account number : ");
+		
+		// read account number
+		String accountNumber = scanner.nextLine();
+		
+		if( findAccount(accountNumber) == null )
+			System.out.println("Account with number " + accountNumber + " not found!");
+		else
+		{
+			// show
+			Account account = findAccount(accountNumber);
+			System.out.println("Account type    : "+ account.getType() + " Account");
+			System.out.println("Account number  : "+ account.getNumber() );
+			System.out.println("Account balance : $"+ account.getBalance() );
+		}
+	}
+	
+	//  to deposit
+	public void deposit(Scanner scanner)
+	{
+		// ask for account number
+		System.out.print("Enter account number : ");
+		
+		// read account number
+		String accountNumber = scanner.nextLine();
+		
+		if( findAccount(accountNumber) == null )
+		{
+			System.out.println("Account with number " + accountNumber + " not found!");
+			return;
+		}
+		
+		// the account to deposit to
+		Account account = findAccount(accountNumber);
+		
+		// ask for amount
+		System.out.print("Enter amount to deposit : ");
+		float depositAmount =  Float.parseFloat( scanner.nextLine() );
+		System.out.println("Account type    : "+ account.getType() + " Account");
+		System.out.println("Account number  : "+ account.getNumber() );
+		System.out.println("Account balance : $"+ account.getBalance() );
+		
+		
+		System.out.println();
+		
+		
+		account.desposit(depositAmount);
+		// show deposit amount and new balance
+		System.out.println("Deposit amount  : $" + depositAmount);
+		System.out.println("New Balance     : $" + account.getBalance());
+		
+	}
+	
+	// to withdraw
+	public void withdraw(Scanner scanner)
+	{
+		
+		System.out.print("Enter account number : ");
+		String accountNumber = scanner.nextLine();
+		
+		if( findAccount(accountNumber) == null )
+		{
+			System.out.println("Account with number " + accountNumber + " not found!");
+			return;
+		}
+		
+		
+		Account account = findAccount(accountNumber);
+		
+		
+		System.out.print("Enter amount to withdraw : ");
+		float withdrawAmount =  Float.parseFloat( scanner.nextLine() );
+		
+		
+		System.out.println("Account type    : "+ account.getType() + " Account");
+		System.out.println("Account number  : "+ account.getNumber() );
+		System.out.println("Account balance : $"+ account.getBalance() );
+		System.out.println();
+		System.out.print("Withdraw amount : $" + withdrawAmount);
+		
+		// deposit
+		boolean success = account.withdraw(withdrawAmount);
+		// if success
+		if( success )
+		{
+			// show new balance
+			System.out.println("\nNew Balance     : $" + account.getBalance());
+		}
+		else
+		{
+			// show denied
+			System.out.println("  - denied");
+			System.out.println("Current Balance : $" + account.getBalance());
+		}
+		
+	}
+	
+	// method to print
+	public void printMonthlyStatement(Scanner scanner)
+	{
+		
+		System.out.print("Enter account number : ");
+		String accountNumber = scanner.nextLine();
+		
+		if( findAccount(accountNumber) == null )
+		{
+			System.out.println("Account with number " + accountNumber + " not found!");
+			return;
+		}
+		Account account = findAccount(accountNumber);		
+		System.out.println("Account Name     : " + lastName + ", " + firstName);
+		account.printMonthlyStatement();
+	}
+	
+	public void printMonthlyStatement()
+	{
+		
+		System.out.println("Account Name     : " + lastName + ", " + firstName);
+		for (Account account : acc )
+		{
+			account.printMonthlyStatement();
+			System.out.println();
+		}
+	}
+	
+	// to remove account with this id
+	public void removeAccount(String accountNumber)
+	{
+		// the index
+		int index = 0;
+		for( Account account : acc )
+		{
+			// if this is the account number
+			if( account.getNumber().equals(accountNumber))
+			{
+				break;
+			}
+			index++;
+		}
+		acc.remove(index);
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	
+	// to get the number of acc
+	public int getNumAccounts()
+	{
+		return acc.size();
+	}
+
+	public LinkedList<Account> getAccounts() {
+		return acc;
+	}
+	
+	
+}
+		 
