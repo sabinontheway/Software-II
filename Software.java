@@ -70,6 +70,7 @@ public class Software
 		}
 		return -1;
 	}
+
 	// find customer by user ID password
 	public BankCustomer getCustomerByUserPassword(String user,String password)
 	{
@@ -106,6 +107,7 @@ public class Software
 			customer.printInformation();
 		}
 	}
+	
 	// method to read one account
 	public void readOneAccountOfCustomer(Scanner scanner)
 	{
@@ -170,12 +172,16 @@ public class Software
 				
 				// get the checking
 				CheckingAccount checking = (CheckingAccount)account;
+				// show limit and service fee
+				System.out.println("Limit Amount    : $"+ checking.getLimit());
 				System.out.println("Service fee     : $"+ checking.getServiceFee() );
 			}
 			else
 			{
 				// get savings
 				SavingAccount saving = (SavingAccount)account;
+				// show limit and service fee
+				System.out.println("Limit Amount    : $"+ saving.getLimit() );
 				System.out.println("Interest rate   : "+ saving.getInterestRate() + "%");
 			}
 		}
@@ -215,23 +221,29 @@ public class Software
 		// if this is check
 		if( accountChoice == 1 ) 
 		{
+			// ask limit
+			System.out.print("Enter limit amount : ");
+			float limit = Float.parseFloat(scanner.nextLine());
 			
 			// ask service fee
 			System.out.print("Enter service fee : ");
 			float serviceFee = Float.parseFloat(scanner.nextLine());
 			
 			// add new account to this customer
-			customer.addAccount( new CheckingAccount(accountNumber, balance,  serviceFee));
+			customer.addAccount( new CheckingAccount(accountNumber, balance, limit, serviceFee));
 		}
 		else
 		{
-		
+			// ask limit
+			System.out.print("Enter limit amount : ");
+			float limit = Float.parseFloat(scanner.nextLine());
+			
 			// ask service fee
 			System.out.print("Enter interest rate : ");
 			float interestRate = Float.parseFloat(scanner.nextLine());	
 			
 			// create new account
-			customer.addAccount( new SavingAccount(accountNumber, balance,interestRate));
+			customer.addAccount( new SavingAccount(accountNumber, balance, limit, interestRate));
 		}
 		
 		// show success
@@ -239,4 +251,96 @@ public class Software
 		
 	}
 	
+	// check if there is an account number
+	public boolean hasAccountNumber(String accountNumber)
+	{
+		for( BankCustomer bankCustomer : customers )
+		{
+			// check each account
+			for( Account account : bankCustomer.getAccounts() )
+			{
+				if( account.getNumber().equals(accountNumber))
+					return true;
+			}
+		}
+		return false;
+	}
 	
+	// method to remove one account
+	public void removeOneAccount(Scanner scanner)
+	{
+		BankCustomer customer = null;
+		System.out.println("Enter id : ");
+		String id = scanner.nextLine();
+		
+		// check if the customer is found
+		customer = getCustomerById(id);
+		// if this is null
+		if( customer == null )
+		{
+			// show message customer not found
+			System.out.println("Customer with id " + id + " does not exist");
+			return;
+		}
+		
+		// ask account number
+		System.out.print("Enter account number : ");
+		// read account number
+		String accountNumber = scanner.nextLine();
+		
+		if( customer.findAccount(accountNumber) == null )
+		{
+			System.out.println("Account with number " + accountNumber + " not found!");
+			return;
+		}
+		
+		// if only has one account
+		if( customer.getNumAccounts() == 1 )
+		{
+			// show messsage
+			System.out.println("This customer only have one account\n" + 
+					"Close this account will remove this customer off the system\nDo you still want to close account (Y/N)");
+			
+			// read choice
+			String choice = scanner.nextLine();
+			
+			// if this is yes
+			if(choice.charAt(0) == 'y' || choice.charAt(0) == 'Y')
+			{
+				// delete this account
+				customer.removeAccount(accountNumber);
+				int customerIndex = getCustomerIndex(id);
+				// remove this
+				customers.remove(customerIndex);
+			}
+			return;
+		}
+		
+		// remove this account
+		customer.removeAccount(accountNumber);
+			
+	}
+	
+	// display all customers with their accounts
+	public void displayAllCustomersWithAccounts()
+	{
+		for( BankCustomer bankCustomer : customers )
+		{
+			bankCustomer.printInformation();
+			System.out.println();
+		}
+	}
+
+	// method to process monthly statements
+	public void processMonthlyStatements()
+	{
+		for( BankCustomer bankCustomer : customers )
+		{
+			bankCustomer.printMonthlyStatement();
+			System.out.println();
+		}
+	}
+
+
+}
+
