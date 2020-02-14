@@ -1,4 +1,3 @@
-
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -28,7 +27,8 @@ public class BankCustomer
 		// create acc list
 		acc = new LinkedList<>();
 	}
-// to open a nee account
+	
+	// to open a nee account
 	public void addAccount(Account account)
 	{
 		acc.add(account);
@@ -81,14 +81,16 @@ public class BankCustomer
 			{
 				
 				CheckingAccount checking = (CheckingAccount)account;
-				// show service fee
+				// show limit and service fee
+				System.out.println("Limit Amount    : $"+ checking.getLimit());
 				System.out.println("Service fee     : $"+ checking.getServiceFee() );
 			}
 			else
 			{
 				//for savings account
 				SavingAccount saving = (SavingAccount)account;
-				// show service fee
+				// show limit and service fee
+				System.out.println("Limit Amount    : $"+ saving.getLimit() );
 				System.out.println("Interest rate   : "+ saving.getInterestRate() + "%");
 			}
 		}
@@ -116,6 +118,7 @@ public class BankCustomer
 		}
 		return null;
 	}
+	
 	// to check balance
 	public void checkBal(Scanner scanner)
 	{
@@ -287,3 +290,5 @@ public class BankCustomer
 	
 }
 		 
+
+
