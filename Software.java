@@ -170,16 +170,12 @@ public class Software
 				
 				// get the checking
 				CheckingAccount checking = (CheckingAccount)account;
-				// show limit and service fee
-				System.out.println("Limit Amount    : $"+ checking.getLimit());
 				System.out.println("Service fee     : $"+ checking.getServiceFee() );
 			}
 			else
 			{
 				// get savings
 				SavingAccount saving = (SavingAccount)account;
-				// show limit and service fee
-				System.out.println("Limit Amount    : $"+ saving.getLimit() );
 				System.out.println("Interest rate   : "+ saving.getInterestRate() + "%");
 			}
 		}
@@ -225,7 +221,7 @@ public class Software
 			float serviceFee = Float.parseFloat(scanner.nextLine());
 			
 			// add new account to this customer
-			customer.addAccount( new CheckingAccount(accountNumber, balance, limit, serviceFee));
+			customer.addAccount( new CheckingAccount(accountNumber, balance,  serviceFee));
 		}
 		else
 		{
@@ -235,7 +231,7 @@ public class Software
 			float interestRate = Float.parseFloat(scanner.nextLine());	
 			
 			// create new account
-			customer.addAccount( new SavingAccount(accountNumber, balance, limit, interestRate));
+			customer.addAccount( new SavingAccount(accountNumber, balance,interestRate));
 		}
 		
 		// show success
