@@ -224,4 +224,128 @@ public class BankService
 		}
 	}
 	
+	// method to run employee menu
+	private static void bankEmployeeMenu(Scanner scanner,Software  bankCustomers)
+	{
+		// bank employee menu
+		bankEmployeeMenu();
+		// ask choice
+		System.out.print("Enter option : ");
+		// read choice
+		int bankMenuChoice = Integer.parseInt(scanner.nextLine());
+		
+		// while this is not 0
+		while( bankMenuChoice != 0 )
+		{
+			// work according to choice
+			if(bankMenuChoice == 1 )
+			{
+				// Add a New Customer â€“ Open New Account
+				bankCustomers.addNewCustomer(scanner);
+			}
+			else if(bankMenuChoice == 2 )
+			{
+				// Display a Customer With All Accounts
+				bankCustomers.displayCustomerAllAccounts(scanner);
+			}
+			else if(bankMenuChoice == 3 )
+			{
+				// Open New Account for Current Customer
+				bankCustomers.openNewAccount(scanner, null);
+			}
+			else if(bankMenuChoice == 4 )
+			{
+				// Read One Account of One Customer
+				bankCustomers.readOneAccountOfCustomer(scanner);
+			}
+			else if(bankMenuChoice == 5 )
+			{
+				// Remove One Account of Current Customer
+				bankCustomers.readOneAccountOfCustomer(scanner);
+			}
+			else if(bankMenuChoice == 6 )
+			{
+				// Display all Customers with their accounts
+				bankCustomers.displayAllCustomersWithAccounts();
+			}
+			else if(bankMenuChoice == 7 )
+			{
+				bankCustomers.processMonthlyStatements();
+			}
+			
+			else 
+			{
+				System.out.println("Invalid option!");
+			}
+			
+			System.out.println();
+			bankEmployeeMenu();
+			System.out.print("Enter option : ");
+			bankMenuChoice = Integer.parseInt(scanner.nextLine());		
+		}
+	}
+	
+	public static void main(String[] args) throws Exception
+	{
+		Software bankCustomers = new Software();
+		Scanner fileScanner = new Scanner(new File("bankCustomer.csv"));
+		
+		while( fileScanner.hasNextLine() )
+		{
+			String line = fileScanner.nextLine();
+			String tokens[] = line.split(",");
+			bankCustomers.addCustomer(getNewCustomer(tokens));
+		
+		}
+                
+		fileScanner.close();
+		Scanner scanner = new Scanner(System.in);
+		int mainMenuChoice; 
+		
+		// show main menu
+		mainMenu();
+		System.out.print("Enter option : ");
+		mainMenuChoice = Integer.parseInt( scanner.nextLine() );
+		
+		
+		while( mainMenuChoice != 0 )
+		{
+			if( mainMenuChoice == 1 )
+			{
+				bankEmployeeMenu(scanner, bankCustomers);
+			}
+			else if(mainMenuChoice == 2 )
+			{
+				runCustomerLoginMenu(scanner, bankCustomers);
+			}
+			else
+			{
+				System.out.println("Invalid option!");
+			}
+			System.out.println();
+			mainMenu();
+			System.out.print("Enter option : ");
+			mainMenuChoice = Integer.parseInt( scanner.nextLine() );
+		}
+		scanner.close();
+		saveToFile(bankCustomers);
+	}
+
+	public static String getNewAccountNumber(Software bankCustomers)
+	{
+		String accountNumber = "";
+		for( int i=0; i<10; i++)
+			accountNumber = accountNumber + obj1.nextInt(10);
+		while( bankCustomers.hasAccountNumber(accountNumber))
+		{
+			accountNumber = "";
+			for( int i=0; i<10; i++)
+				accountNumber = accountNumber + obj1.nextInt(10);
+		}
+		return accountNumber;
+	}
+}
+
+
+	
 	
