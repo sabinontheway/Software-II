@@ -2,17 +2,28 @@
 
 
 
+//inheritance
 public class CheckingAccount extends Account 
 {
-    
+    //variables and data types
+	private float limit;
 	private float serviceFee;
         
-       
+        //constructor
 		
-	public CheckingAccount(String number, float balance,float serviceFee) 
+	public CheckingAccount(String number, float balance,float limit,float serviceFee) 
 	{
 		super(number, balance);
+		this.limit = limit;
 		this.serviceFee = serviceFee;
+	}
+
+	public float getLimit() {
+		return limit;
+	}
+
+	public void setLimit(float limit) {
+		this.limit = limit;
 	}
 
 	public float getServiceFee() {
@@ -35,7 +46,7 @@ public class CheckingAccount extends Account
 	@Override
 	public String toString() 
 	{
-		return getNumber() + "," + getBalance() + ","  + serviceFee;
+		return getNumber() + "," + getBalance() + "," + limit + "," + serviceFee;
 	}
 	
 	// get type
