@@ -1,16 +1,26 @@
 //inheritance
 public class SavingAccount extends Account 
 {
+	
+	private float limit;
 	private float interestRate;
 	
- //parameterized constructors
-	public SavingAccount(String number, float balance, float interestRate) 
+        //parameterized constructors
+	public SavingAccount(String number, float balance,float limit,float interestRate) 
 	{
 		super(number, balance);
+		this.limit = limit;
 		this.interestRate = interestRate;
 	}
 
-	
+	public float getLimit() {
+		return limit;
+	}
+
+	public void setLimit(float limit) {
+		this.limit = limit;
+	}
+
 	public float getInterestRate() {
 		return interestRate;
 	}
@@ -29,11 +39,11 @@ public class SavingAccount extends Account
 	}
 	
 	
-  //polymorphism
+        //polymorphism
 	@Override
 	public String toString() 
 	{
-		return getNumber() + "," + getBalance() + "," + interestRate;
+		return getNumber() + "," + getBalance() + "," + limit + "," + interestRate;
 	}
 
 	public String getType()
