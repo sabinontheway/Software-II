@@ -45,4 +45,5 @@ public class BankCustomerTest {
         if(expResult != result)
         fail("The test case is a prototype.");
     }
+}
     
