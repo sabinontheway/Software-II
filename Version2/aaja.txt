@@ -1,0 +1,34 @@
+package com.example.demo.controller;
+
+
+import com.example.demo.object.Account;
+import com.example.demo.object.BankCustomer;
+import com.example.demo.object.CheckingAccount;
+import org.springframework.web.bind.annotation.*;
+
+    //Posting api in json format in server   (localhost:8080/createcustomerinfo/)
+    @PostMapping("/createcustomerinfo")
+    public void createcreatecustomerinfo(@RequestBody BankCustomer bankcustomer) {
+        bankcustomer.accDetails();
+
+    }
+
+
+    //getting data from local server    (localhost:8080/getcustomerinfo/)
+    @GetMapping("/getcustomerinfo")
+    public String getcustomerinfo(@RequestHeader String id, @RequestHeader String firstname, @RequestHeader String lastname, @RequestHeader String address) {
+        return "Your lastname,firstname,id,and address are in order as follows" + id + firstname + lastname + address;
+    }
+
+    //updatedBankcustomer in json format  (localhost:8080/updatecustomerinfo/)
+    @PutMapping("/updatecustomerinfo")
+    public void updatecustomerinfo(@RequestBody BankCustomer bankcustomer) {
+        bankcustomer.customerInfo();
+    }
+
+    //deleted data in Bankaccount in json   (localhost:8080/deletecustomerinfo/)
+    @DeleteMapping("/deletecustomerinfo")
+    public void deletecustomerinfo(@RequestBody BankCustomer bankcustomer) {
+        bankcustomer.customerInfo();
+    }
+
