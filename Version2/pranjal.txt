@@ -1,0 +1,20 @@
+package com.example.demo.controller;
+
+
+import com.example.demo.object.Account;
+import com.example.demo.object.BankCustomer;
+import com.example.demo.object.CheckingAccount;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+public class UserController {
+
+    @GetMapping("/getnumberbalance")
+    public String getnumberbalance(@RequestHeader String number, @RequestHeader float balance) {
+        return "Your number is" + " " + number + " " + "Your balance is" + " " + balance;
+    }
+
+    @PostMapping("/createnumber")
+    public Account createnumber(@RequestHeader String number, @RequestHeader float balance) {
+        return new Account(number, balance);
+    }
