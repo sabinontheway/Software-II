@@ -1,0 +1,42 @@
+package com.example.demo.controller;
+
+
+import com.example.demo.object.Account;
+import com.example.demo.object.BankCustomer;
+import com.example.demo.object.CheckingAccount;
+import org.springframework.web.bind.annotation.*;
+
+   //      Two functionalities used below printmonthlystatement() and getcustomerinfo()
+
+
+    //Posting data from header to api    DO this post request first then the bottom post request next(localhost:8080/createcheckingaccount/)
+    @PostMapping("/createcheckingaccount")
+    public Account createcheckingaccount(@RequestHeader float limit, @RequestHeader float servicefee, @RequestHeader String number, @RequestHeader float balance) {
+        return new CheckingAccount(number, balance, limit, servicefee);
+    }
+
+
+    //Posting api in json format in server   (localhost:8080/printmonthlystatement/)
+    @PostMapping("/printmonthlystatement")
+    public void printmonthlystatement(@RequestBody CheckingAccount checkingaccount) {
+        checkingaccount.printMonthlyStatement();
+
+    }
+
+    //getting data from local server    (localhost:8080/getcheckingaccount/)
+    @GetMapping("/getcheckingaccount")
+    public String getcheckingaccount(@RequestHeader float limit, @RequestHeader float servicefee) {
+        return "Your limit is" + " " + limit + " " + "Your servicefee is" + " " + servicefee;
+    }
+
+    //updatedcheckingaccount in json format  (localhost:8080/updatecheckingaccount/)
+    @PutMapping("/updatecheckingaccount")
+    public void updatecheckingaccount(@RequestBody CheckingAccount checkingaccount) {
+        checkingaccount.printMonthlyStatement();
+    }
+
+    //deleted data in checkingaccount in json   (localhost:8080/deletecheckingaccount/)
+    @DeleteMapping("/deletecheckingaccount")
+    public void deletecheckingaccount(@RequestBody CheckingAccount checkingaccount) {
+        checkingaccount.printMonthlyStatement();
+    }
