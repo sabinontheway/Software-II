@@ -1,0 +1,49 @@
+package com.example.demo.controller;
+
+import com.example.demo.object.Account;
+import com.example.demo.object.BankCustomer;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+
+@GetMapping("/listallsavingaccounts")
+    public List ListAllSavingCustomers(){
+    List customers = new ArrayList();
+    customers = getAllSavingAccountCustomers();
+        return customers;
+    }
+    private List  getAllSavingAccountCustomers(){
+    List customers = new ArrayList();
+
+        try {
+            // create scanner instance
+            Scanner scanner = new Scanner(Paths.get("C:\\Users\\pokha\\Downloads\\javaapp\\webservices-java-master\\restdemo-1\\src\\bankCustomer.csv").toFile());
+
+            // set comma as delimiter
+            scanner.useDelimiter("\n");
+
+            // read all fields
+            while (scanner.hasNext()) {
+//                System.out.print(scanner.next() + " ");
+                customers.add(scanner.next());
+            }
+
+            //close the scanner
+            scanner.close();
+
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+    return customers;
+    }
+}
+
+
