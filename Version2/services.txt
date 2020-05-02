@@ -1,0 +1,10 @@
+for this project we converted create savings account, list all savings account, print monthly statement and get customer info functionality
+into services. For building the restful api we used springboot service and postman to test out the functionality.
+we created two controller trycontroller.java and usercontroller,java to perform the functionality. We created an object of every class from 
+previous version so we did not have to change the code in previous version. With the help of springboot we were able to convert the 
+functionality easily into the services. We performed get, post, put and delete mapping to acheive the desired result. Get mapping is used
+to fetch the stored data, post mapping is used to post the new data in the database, put mapping is used to update the existing the record
+and delete mapping is used to delete the record. We used all this verb when developing the services. We used postmapping to create savings
+account which call all the function from the previous version that are required when creating the saving account. We used get mapping to
+get the customer info, print monthly statement, and saving account info from the database which is displayed to the user. We also used put
+mapping and delete mapping to update our record.
